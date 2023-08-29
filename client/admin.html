@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="admin.js" type="module"></script>
+    <style>
+        body, html{
+            margin:0;
+            height:100%;
+        }
+        .panikButton{
+            background-color: rgb(0, 0, 0);
+            color:rgb(255, 255, 255);
+            font-size: large;
+            height: 10vh;
+            width: 50vw;
+        }
+        form{
+            margin: 5%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+
+        
+
+    </style>
+</head>
+<body>
+    <form>
+            <label for="timeField">Time </label>
+            <input id='timeField' type="time" step="3"></textarea>
+            <button id="setTime" type="button">set</button>
+    </form>
+    <form>
+            <label for="background">background</label>
+            <input type="color" id="background"></input>
+            <button id="setBackground" type="button">set</button>
+    </form>
+    <form>
+            <label for="panik">panik</label>
+            <input type="color" id="panik" class="panikcolor"></input>
+            <button id="setPanik" type="button">set</button>
+    </form>
+    <form>
+            <button id="panikMode" type="button" class="panikButton">PANIKMODE</button>
+    </form>
+    <form>
+        <textarea id="textBox" rows="4" cols="50"></textarea>
+        <button id="textButton" type="button">Show Text</button>
+    </form>
+</body>
+</html>

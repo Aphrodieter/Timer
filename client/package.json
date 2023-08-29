@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "browser-sync": "^2.29.3",
+    "package.json": "^2.0.1",
+    "socket.io-client": "^4.7.2"
+  },
+  "devDependencies": {
+    "snowpack": "3.8.8"
+  },
+  "scripts": {
+    "start": "snowpack dev"
+  }
+}
