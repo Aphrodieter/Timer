@@ -92,33 +92,43 @@ io.on('connection', socket => {
 
 function setTime(time){
     
-    data.hs = time.slice(0,2)
-    data.mins = time.slice(3,5)
-    data.secs = time.slice(6,8)
+    data.hs = parseInt(time.slice(0,2));
+    data.mins = parseInt(time.slice(3,5));
+    data.secs = parseInt(time.slice(6,8));
+
+    data.totalSeconds = data.secs + data.mins * 60 + data.hs * 3600;
 }
 
 function startCountdown(){
+        var start = Date.now();
+        
         data.intervalID = setInterval(function(){
+            var delta = Date.now() - start;
+            var secondsSinceStart = Math.floor(delta/1000);
+            var newSeconds = data.totalSeconds - secondsSinceStart;
             //console.log(`${data.hs}:${data.mins}:${data.secs}`)
-            if(timerFinished()){
+            io.emit('currentTime', newSeconds);
+            if(timerFinished(newSeconds)){
                 clearInterval(data.intervalID)
             }
-            else{
-                substractStepwise()
-            }
-            io.emit('currentTime', data.hs, data.mins, data.secs);
+            
+            
 
         
-    }, 1000);
+    }, 100);
 }
 
-function timerFinished(){
-    return data.hs+data.mins+data.secs == 0
+function timerFinished(newSeconds){
+    return newSeconds == 0;
 }
 
-function substractStepwise(){
+function substractStepwise(start){
+    var delta = Date.now() - start;
+    var secondsSinceStart = Math.floor(delta/1000);
+    var [new_hs, new_mins, new_secs] = [data.hs, data.mins, data.secs];
+
     if(data.secs > 0){
-        data.secs--;
+        new_secs = data.secs - secondsSinceStart;
     }
     else if(data.mins > 0){
         data.mins--;
@@ -131,3 +141,5 @@ function substractStepwise(){
     }
     
 }
+
+

@@ -139,9 +139,12 @@ socket.on('timeSet', (hs_, mins_, secs_)=>{
 
 
 //get current time information from server
-socket.on('currentTime', (hs_, mins_, secs_) =>{
-    // console.log(hs_ + " " + mins_ + " " + secs_);
-    [data.hs, data.mins, data.secs] = [hs_, mins_, secs_];
+socket.on('currentTime', (newSeconds) =>{
+    data.hs = parseInt(newSeconds/3600);
+    data.mins = parseInt((newSeconds%3600) / 60);
+    data.secs = newSeconds%60;
+
+
 
     // 60 sekunden übrig --> panikmode activated
     if(timeRunningOut() && !data.panikMode){
